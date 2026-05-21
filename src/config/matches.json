@@ -1,0 +1,104 @@
+[
+  {
+    "id": "wc2026-match-01",
+    "stage": "Group A",
+    "date": "2026-06-11T18:00:00Z",
+    "homeTeam": "Mexico",
+    "awayTeam": "USA",
+    "homeFlag": "🇲🇽",
+    "awayFlag": "🇺🇸",
+    "polymarket": {
+      "marketId": "0xmock-market-01",
+      "conditionId": "0xmock-condition-01",
+      "homeTokenId": "1001",
+      "awayTokenId": "1002"
+    },
+    "status": "scheduled",
+    "result": null
+  },
+  {
+    "id": "wc2026-match-02",
+    "stage": "Group B",
+    "date": "2026-06-11T21:00:00Z",
+    "homeTeam": "Canada",
+    "awayTeam": "Morocco",
+    "homeFlag": "🇨🇦",
+    "awayFlag": "🇲🇦",
+    "polymarket": {
+      "marketId": "0xmock-market-02",
+      "conditionId": "0xmock-condition-02",
+      "homeTokenId": "2001",
+      "awayTokenId": "2002"
+    },
+    "status": "scheduled",
+    "result": null
+  },
+  {
+    "id": "wc2026-match-03",
+    "stage": "Group C",
+    "date": "2026-06-12T15:00:00Z",
+    "homeTeam": "Argentina",
+    "awayTeam": "France",
+    "homeFlag": "🇦🇷",
+    "awayFlag": "🇫🇷",
+    "polymarket": {
+      "marketId": "0xmock-market-03",
+      "conditionId": "0xmock-condition-03",
+      "homeTokenId": "3001",
+      "awayTokenId": "3002"
+    },
+    "status": "scheduled",
+    "result": null
+  },
+  {
+    "id": "wc2026-match-04",
+    "stage": "Group D",
+    "date": "2026-06-12T18:00:00Z",
+    "homeTeam": "Brazil",
+    "awayTeam": "Croatia",
+    "homeFlag": "🇧🇷",
+    "awayFlag": "🇭🇷",
+    "polymarket": {
+      "marketId": "0xmock-market-04",
+      "conditionId": "0xmock-condition-04",
+      "homeTokenId": "4001",
+      "awayTokenId": "4002"
+    },
+    "status": "scheduled",
+    "result": null
+  },
+  {
+    "id": "wc2026-match-05",
+    "stage": "Group E",
+    "date": "2026-06-13T15:00:00Z",
+    "homeTeam": "England",
+    "awayTeam": "Ukraine",
+    "homeFlag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+    "awayFlag": "🇺🇦",
+    "polymarket": {
+      "marketId": "0xmock-market-05",
+      "conditionId": "0xmock-condition-05",
+      "homeTokenId": "5001",
+      "awayTokenId": "5002"
+    },
+    "status": "scheduled",
+    "result": null
+  },
+  {
+    "id": "wc2026-match-06",
+    "stage": "Group F",
+    "date": "2026-06-13T18:00:00Z",
+    "homeTeam": "Spain",
+    "awayTeam": "Germany",
+    "homeFlag": "🇪🇸",
+    "awayFlag": "🇩🇪",
+    "polymarket": {
+      "marketId": "0xmock-market-06",
+      "conditionId": "0xmock-condition-06",
+      "homeTokenId": "6001",
+      "awayTokenId": "6002"
+    },
+    "status": "scheduled",
+    "result": null
+  }
+]
