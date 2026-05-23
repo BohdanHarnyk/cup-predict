@@ -7,11 +7,8 @@
     "awayTeam": "South Africa",
     "homeFlag": "🇲🇽",
     "awayFlag": "🇿🇦",
-    "polymarket": {
-      "marketId": "0xmock-market-01",
-      "conditionId": "0xmock-condition-01",
-      "homeTokenId": "1001",
-      "awayTokenId": "1002"
+    "solana": {
+      "marketId": "0xmock-market-01"
     },
     "status": "scheduled",
     "result": null
@@ -24,11 +21,8 @@
     "awayTeam": "Czechia",
     "homeFlag": "🇰🇷",
     "awayFlag": "🇨🇿",
-    "polymarket": {
-      "marketId": "0xmock-market-02",
-      "conditionId": "0xmock-condition-02",
-      "homeTokenId": "2001",
-      "awayTokenId": "2002"
+    "solana": {
+      "marketId": "0xmock-market-02"
     },
     "status": "scheduled",
     "result": null
@@ -41,11 +35,8 @@
     "awayTeam": "Bosnia and Herzegovina",
     "homeFlag": "🇨🇦",
     "awayFlag": "🇧🇦",
-    "polymarket": {
-      "marketId": "0xmock-market-03",
-      "conditionId": "0xmock-condition-03",
-      "homeTokenId": "3001",
-      "awayTokenId": "3002"
+    "solana": {
+      "marketId": "0xmock-market-03"
     },
     "status": "scheduled",
     "result": null
@@ -58,11 +49,8 @@
     "awayTeam": "Paraguay",
     "homeFlag": "🇺🇸",
     "awayFlag": "🇵🇾",
-    "polymarket": {
-      "marketId": "0xmock-market-04",
-      "conditionId": "0xmock-condition-04",
-      "homeTokenId": "4001",
-      "awayTokenId": "4002"
+    "solana": {
+      "marketId": "0xmock-market-04"
     },
     "status": "scheduled",
     "result": null
@@ -75,11 +63,8 @@
     "awayTeam": "Switzerland",
     "homeFlag": "🇶🇦",
     "awayFlag": "🇨🇭",
-    "polymarket": {
-      "marketId": "0xmock-market-05",
-      "conditionId": "0xmock-condition-05",
-      "homeTokenId": "5001",
-      "awayTokenId": "5002"
+    "solana": {
+      "marketId": "0xmock-market-05"
     },
     "status": "scheduled",
     "result": null
@@ -92,11 +77,8 @@
     "awayTeam": "Morocco",
     "homeFlag": "🇧🇷",
     "awayFlag": "🇲🇦",
-    "polymarket": {
-      "marketId": "0xmock-market-06",
-      "conditionId": "0xmock-condition-06",
-      "homeTokenId": "6001",
-      "awayTokenId": "6002"
+    "solana": {
+      "marketId": "0xmock-market-06"
     },
     "status": "scheduled",
     "result": null

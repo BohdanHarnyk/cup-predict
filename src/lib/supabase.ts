@@ -47,10 +47,10 @@ class MockDatabase {
   getProfiles(): UserProfile[] {
     // Default seed profiles for leaderboard variety
     const defaultProfiles: UserProfile[] = [
-      { wallet_address: '0x1234...5678', username: '💰 CryptoKing', virtual_balance: 5350.00, created_at: new Date().toISOString() },
-      { wallet_address: '0xabcd...ef01', username: '⚽ MessiFan10', virtual_balance: 3200.50, created_at: new Date().toISOString() },
-      { wallet_address: '0x9876...5432', username: '📊 StatsGuru', virtual_balance: 1450.00, created_at: new Date().toISOString() },
-      { wallet_address: '0x4321...8765', username: '🍀 LuckyBettor', virtual_balance: 920.00, created_at: new Date().toISOString() },
+      { wallet_address: '7xKXJn2wF54jJ52iKxW6zB8b1aF5v6C7d8e9f0g1', username: '💰 CryptoKing', virtual_balance: 5350.00, created_at: new Date().toISOString() },
+      { wallet_address: 'Gv7tE1U8Gv7tE1U8Gv7tE1U8Gv7tE1U8Gv7tE1U8', username: '⚽ MessiFan10', virtual_balance: 3200.50, created_at: new Date().toISOString() },
+      { wallet_address: '3Wnvsxej53Wnvsxej53Wnvsxej53Wnvsxej53Wnv', username: '📊 StatsGuru', virtual_balance: 1450.00, created_at: new Date().toISOString() },
+      { wallet_address: '9z20kr0ih9z20kr0ih9z20kr0ih9z20kr0ih9z20', username: '🍀 LuckyBettor', virtual_balance: 920.00, created_at: new Date().toISOString() },
     ];
     return this.getStorageItem<UserProfile[]>('cuppredict_profiles', defaultProfiles);
   }
@@ -63,7 +63,7 @@ class MockDatabase {
     if (!profile && walletAddress) {
       profile = {
         wallet_address: walletAddress,
-        username: `User_${walletAddress.slice(2, 6)}`,
+        username: `User_${walletAddress.slice(0, 4)}`,
         virtual_balance: 1000.00, // starting balance
         created_at: new Date().toISOString()
       };
@@ -169,7 +169,7 @@ export const dbService = {
       // Auto-create on Supabase if not found
       const newProfile = {
         wallet_address: walletAddress,
-        username: `User_${walletAddress.slice(2, 6)}`,
+        username: `User_${walletAddress.slice(0, 4)}`,
         virtual_balance: 1000.00
       };
       const { data: created, error: createError } = await supabase

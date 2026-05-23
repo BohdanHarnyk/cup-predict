@@ -46,7 +46,7 @@ function AppStateProvider({ children }: { children: React.ReactNode }) {
   const login = useCallback(() => {
     if (isMockAuth) {
       setMockAuthenticated(true);
-      setMockWalletAddress('0xabc1234567890123456789012345678901234567');
+      setMockWalletAddress('Solanapredict111111111111111111111111111111');
       if (typeof window !== 'undefined') {
         localStorage.setItem('cuppredict_mock_auth', 'true');
       }
@@ -74,7 +74,7 @@ function AppStateProvider({ children }: { children: React.ReactNode }) {
         const stored = localStorage.getItem('cuppredict_mock_auth') === 'true';
         setMockAuthenticated(stored);
         if (stored) {
-          setMockWalletAddress('0xabc1234567890123456789012345678901234567');
+          setMockWalletAddress('Solanapredict111111111111111111111111111111');
         }
       }
       setMockReady(true);
@@ -178,7 +178,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
           logo: '⚽',
         },
         embeddedWallets: {
-          ethereum: {
+          solana: {
             createOnLogin: 'users-without-wallets',
           },
         },

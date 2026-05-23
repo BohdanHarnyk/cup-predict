@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { useAppState } from './providers';
-import { polymarketService, MarketOdds } from '@/lib/polymarket';
+import { solanaService, MarketOdds } from '@/lib/solana';
 import { dbService } from '@/lib/supabase';
 import matchesData from '@/config/matches.json';
 import { Trophy, Wallet, Briefcase, Award, TrendingUp, LogOut, CheckCircle2, RefreshCw, Smartphone, ChevronRight } from 'lucide-react';
@@ -16,11 +16,8 @@ interface Match {
   awayTeam: string;
   homeFlag: string;
   awayFlag: string;
-  polymarket: {
+  solana: {
     marketId: string;
-    conditionId: string;
-    homeTokenId: string;
-    awayTokenId: string;
   };
   status: 'scheduled' | 'live' | 'finished';
   result: 'home' | 'away' | 'draw' | null;
@@ -69,7 +66,7 @@ export default function Home() {
     setIsRefreshingOdds(true);
     const updatedOdds: Record<string, MarketOdds> = {};
     for (const match of matchesData as Match[]) {
-      const odds = await polymarketService.getOdds(match.id, match.polymarket.marketId);
+      const odds = await solanaService.getOdds(match.id, match.solana.marketId);
       updatedOdds[match.id] = odds;
     }
     setOddsMap(updatedOdds);
@@ -164,10 +161,9 @@ export default function Home() {
       }
     } else {
       // Real USDC bet
-      // For real betting, we trigger the CLOB SDK
-      const response = await polymarketService.placeRealBet(null, {
-        marketId: selectedMatch.polymarket.marketId,
-        tokenId: selectedPrediction === 'home' ? selectedMatch.polymarket.homeTokenId : selectedMatch.polymarket.awayTokenId,
+      // For real betting, we trigger the Solana service
+      const response = await solanaService.placeRealBet(null, {
+        matchId: selectedMatch.id,
         outcome: selectedPrediction,
         amountUSD: amount,
         odds: selectedOdds
@@ -180,7 +176,7 @@ export default function Home() {
           origin: { y: 0.8 },
           colors: ['#004BFF', '#F5F7FA']
         });
-        setBetSuccessMsg('USDC order sent to Polymarket CLOB! 🚀');
+        setBetSuccessMsg('USDC order sent to Solana Vault! 🚀');
         setTimeout(() => {
           setSelectedMatch(null);
           setSelectedPrediction(null);
@@ -281,7 +277,7 @@ export default function Home() {
           </div>
           <div>
             <div className="text-[11px] text-muted-foreground uppercase font-bold tracking-wider">
-              {mode === 'demo' ? 'My Demo Balance' : 'USDC Wallet (Polygon)'}
+              {mode === 'demo' ? 'My Demo Balance' : 'USDC Wallet (Solana)'}
             </div>
             <div className="text-lg font-black tracking-tight">
               {mode === 'demo' ? (
