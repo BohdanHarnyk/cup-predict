@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 
 // Types
-export interface Profile {
+export interface UserProfile {
   wallet_address: string;
   username: string;
   avatar_url?: string;
@@ -44,18 +44,18 @@ class MockDatabase {
     localStorage.setItem(key, JSON.stringify(value));
   }
 
-  getProfiles(): Profile[] {
+  getProfiles(): UserProfile[] {
     // Default seed profiles for leaderboard variety
-    const defaultProfiles: Profile[] = [
+    const defaultProfiles: UserProfile[] = [
       { wallet_address: '0x1234...5678', username: '💰 CryptoKing', virtual_balance: 5350.00, created_at: new Date().toISOString() },
       { wallet_address: '0xabcd...ef01', username: '⚽ MessiFan10', virtual_balance: 3200.50, created_at: new Date().toISOString() },
       { wallet_address: '0x9876...5432', username: '📊 StatsGuru', virtual_balance: 1450.00, created_at: new Date().toISOString() },
       { wallet_address: '0x4321...8765', username: '🍀 LuckyBettor', virtual_balance: 920.00, created_at: new Date().toISOString() },
     ];
-    return this.getStorageItem<Profile[]>('cuppredict_profiles', defaultProfiles);
+    return this.getStorageItem<UserProfile[]>('cuppredict_profiles', defaultProfiles);
   }
 
-  getProfile(walletAddress: string): Profile | null {
+  getProfile(walletAddress: string): UserProfile | null {
     const profiles = this.getProfiles();
     let profile = profiles.find(p => p.wallet_address.toLowerCase() === walletAddress.toLowerCase());
     
@@ -74,7 +74,7 @@ class MockDatabase {
     return profile || null;
   }
 
-  updateProfileBalance(walletAddress: string, amount: number): Profile | null {
+  updateProfileBalance(walletAddress: string, amount: number): UserProfile | null {
     const profiles = this.getProfiles();
     const index = profiles.findIndex(p => p.wallet_address.toLowerCase() === walletAddress.toLowerCase());
     if (index !== -1) {
@@ -154,7 +154,7 @@ export const mockDb = new MockDatabase();
 
 // Public unified service wrappers
 export const dbService = {
-  async getProfile(walletAddress: string): Promise<Profile | null> {
+  async getProfile(walletAddress: string): Promise<UserProfile | null> {
     if (isMock || !supabase) {
       return mockDb.getProfile(walletAddress);
     }
@@ -245,7 +245,7 @@ export const dbService = {
     return error ? [] : data || [];
   },
 
-  async getLeaderboard(): Promise<Profile[]> {
+  async getLeaderboard(): Promise<UserProfile[]> {
     if (isMock || !supabase) {
       return mockDb.getProfiles().sort((a, b) => b.virtual_balance - a.virtual_balance);
     }

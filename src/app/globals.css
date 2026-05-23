@@ -2,22 +2,22 @@
 
 @layer base {
   :root {
-    --background: #0d0f12;
-    --foreground: #f8fafc;
-    --card: #161a22;
-    --card-foreground: #f1f5f9;
-    --border: #222a36;
+    --background: #F5F7FA;
+    --foreground: #090E1A;
+    --card: #FFFFFF;
+    --card-foreground: #090E1A;
+    --border: #E2E8F0;
     
-    /* Sporty accents */
-    --accent-demo: #00e676; /* Neon green */
-    --accent-real: #3b82f6; /* Electric blue */
-    --accent-demo-hover: #00c853;
-    --accent-real-hover: #2563eb;
+    /* Polymarket brand colors */
+    --accent-demo: #10B981; /* Polymarket YES Green / Emerald */
+    --accent-real: #004BFF; /* Polymarket Brand Royal Blue */
+    --accent-demo-hover: #059669;
+    --accent-real-hover: #0038D6;
     
-    --success: #10b981;
-    --destructive: #ef4444;
-    --muted: #64748b;
-    --muted-foreground: #94a3b8;
+    --success: #10B981;
+    --destructive: #EF4444; /* Polymarket NO Red */
+    --muted: #64748B;
+    --muted-foreground: #64748B;
   }
 }
 
@@ -38,6 +38,13 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   
+  /* Overriding standard slate scale to map dark-utility background classes to light theme shades */
+  --color-slate-950: #F8FAFC;
+  --color-slate-900: #F1F5F9;
+  --color-slate-800: #E2E8F0;
+  --color-slate-700: #CBD5E1;
+  --color-slate-600: #94A3B8;
+  
   --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
@@ -52,14 +59,15 @@ body {
 
 /* Custom styles for glassmorphism and modern UI elements */
 .glass {
-  background: rgba(22, 26, 34, 0.7);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 2px 4px -2px rgba(0, 0, 0, 0.03);
 }
 
 .bottom-sheet {
-  box-shadow: 0 -10px 25px -5px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 -10px 25px -5px rgba(0, 0, 0, 0.08);
 }
 
 /* Custom scrollbars */
@@ -69,14 +77,14 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #0d0f12;
+  background: #F1F5F9;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #222a36;
+  background: #CBD5E1;
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #94A3B8;
 }

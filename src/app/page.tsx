@@ -152,7 +152,7 @@ export default function Home() {
           particleCount: 100,
           spread: 70,
           origin: { y: 0.8 },
-          colors: ['#00e676', '#ffffff']
+          colors: ['#10B981', '#004BFF']
         });
         setBetSuccessMsg('Prediction placed successfully! 🏆');
         setTimeout(() => {
@@ -178,7 +178,7 @@ export default function Home() {
           particleCount: 120,
           spread: 80,
           origin: { y: 0.8 },
-          colors: ['#2979ff', '#ffffff']
+          colors: ['#004BFF', '#F5F7FA']
         });
         setBetSuccessMsg('USDC order sent to Polymarket CLOB! 🚀');
         setTimeout(() => {
@@ -237,7 +237,7 @@ export default function Home() {
         <div className="flex items-center gap-2">
           <span className="text-2xl">⚽</span>
           <div>
-            <h1 className="font-extrabold text-lg leading-tight tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">
+            <h1 className="font-extrabold text-lg leading-tight tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-accent-real to-slate-900">
               CupPredict
             </h1>
             <span className="text-[10px] text-muted-foreground uppercase tracking-wider">World Cup 2026</span>
@@ -251,7 +251,7 @@ export default function Home() {
             className={`px-3 py-1 text-xs font-semibold rounded-full transition-all duration-300 ${
               mode === 'demo'
                 ? 'bg-accent-demo text-black shadow-md'
-                : 'text-muted-foreground hover:text-white'
+                : 'text-muted-foreground hover:text-foreground'
             }`}
           >
             Demo 🟢
@@ -261,7 +261,7 @@ export default function Home() {
             className={`px-3 py-1 text-xs font-semibold rounded-full transition-all duration-300 ${
               mode === 'real'
                 ? 'bg-accent-real text-white shadow-md'
-                : 'text-muted-foreground hover:text-white'
+                : 'text-muted-foreground hover:text-foreground'
             }`}
           >
             Real 🔵
@@ -333,7 +333,7 @@ export default function Home() {
                       ? mode === 'demo'
                         ? 'bg-accent-demo text-black border-accent-demo'
                         : 'bg-accent-real text-white border-accent-real'
-                      : 'bg-card border-border text-muted-foreground hover:text-white'
+                      : 'bg-card border-border text-muted-foreground hover:text-foreground'
                   }`}
                 >
                   {stage}
@@ -347,7 +347,7 @@ export default function Home() {
               <button 
                 onClick={loadOdds} 
                 disabled={isRefreshingOdds}
-                className="text-xs text-muted-foreground hover:text-white flex items-center gap-1 transition-colors"
+                className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1 transition-colors"
               >
                 <RefreshCw className={`w-3 h-3 ${isRefreshingOdds ? 'animate-spin' : ''}`} />
                 Refresh Odds
@@ -365,6 +365,10 @@ export default function Home() {
                   awayPrice: 0.30,
                   drawPrice: 0.20
                 };
+
+                const isHomeSelected = selectedMatch?.id === match.id && selectedPrediction === 'home';
+                const isDrawSelected = selectedMatch?.id === match.id && selectedPrediction === 'draw';
+                const isAwaySelected = selectedMatch?.id === match.id && selectedPrediction === 'away';
 
                 return (
                   <div key={match.id} className="p-4 rounded-2xl bg-card border border-border hover:border-slate-800 transition-all duration-300">
@@ -417,28 +421,46 @@ export default function Home() {
                       <div className="grid grid-cols-3 gap-2">
                         <button
                           onClick={() => handleOddsClick(match, 'home')}
-                          className="flex flex-col items-center justify-center p-2 rounded-xl bg-slate-950 hover:bg-slate-900 border border-border active:scale-[0.98] transition-all"
+                          className={`flex flex-col items-center justify-center p-2 rounded-xl border active:scale-[0.98] transition-all ${
+                            isHomeSelected
+                              ? mode === 'demo'
+                                ? 'bg-accent-demo border-accent-demo text-white shadow-sm'
+                                : 'bg-accent-real border-accent-real text-white shadow-sm'
+                              : 'bg-slate-950 hover:bg-slate-900 border-border text-muted-foreground'
+                          }`}
                         >
-                          <span className="text-[10px] text-muted-foreground uppercase font-bold">1</span>
-                          <span className={`text-sm font-black mt-0.5 ${mode === 'demo' ? 'text-accent-demo' : 'text-accent-real'}`}>
+                          <span className={`text-[10px] uppercase font-bold ${isHomeSelected ? 'text-white/85' : 'text-muted-foreground'}`}>1</span>
+                          <span className={`text-sm font-black mt-0.5 ${isHomeSelected ? 'text-white' : mode === 'demo' ? 'text-accent-demo' : 'text-accent-real'}`}>
                             {odds.homeOdds}
                           </span>
                         </button>
                         <button
                           onClick={() => handleOddsClick(match, 'draw')}
-                          className="flex flex-col items-center justify-center p-2 rounded-xl bg-slate-950 hover:bg-slate-900 border border-border active:scale-[0.98] transition-all"
+                          className={`flex flex-col items-center justify-center p-2 rounded-xl border active:scale-[0.98] transition-all ${
+                            isDrawSelected
+                              ? mode === 'demo'
+                                ? 'bg-accent-demo border-accent-demo text-white shadow-sm'
+                                : 'bg-accent-real border-accent-real text-white shadow-sm'
+                              : 'bg-slate-950 hover:bg-slate-900 border-border text-muted-foreground'
+                          }`}
                         >
-                          <span className="text-[10px] text-muted-foreground uppercase font-bold">X</span>
-                          <span className="text-sm font-black mt-0.5 text-white">
+                          <span className={`text-[10px] uppercase font-bold ${isDrawSelected ? 'text-white/85' : 'text-muted-foreground'}`}>X</span>
+                          <span className={`text-sm font-black mt-0.5 ${isDrawSelected ? 'text-white' : 'text-foreground'}`}>
                             {odds.drawOdds}
                           </span>
                         </button>
                         <button
                           onClick={() => handleOddsClick(match, 'away')}
-                          className="flex flex-col items-center justify-center p-2 rounded-xl bg-slate-950 hover:bg-slate-900 border border-border active:scale-[0.98] transition-all"
+                          className={`flex flex-col items-center justify-center p-2 rounded-xl border active:scale-[0.98] transition-all ${
+                            isAwaySelected
+                              ? mode === 'demo'
+                                ? 'bg-accent-demo border-accent-demo text-white shadow-sm'
+                                : 'bg-accent-real border-accent-real text-white shadow-sm'
+                              : 'bg-slate-950 hover:bg-slate-900 border-border text-muted-foreground'
+                          }`}
                         >
-                          <span className="text-[10px] text-muted-foreground uppercase font-bold">2</span>
-                          <span className={`text-sm font-black mt-0.5 ${mode === 'demo' ? 'text-accent-demo' : 'text-accent-real'}`}>
+                          <span className={`text-[10px] uppercase font-bold ${isAwaySelected ? 'text-white/85' : 'text-muted-foreground'}`}>2</span>
+                          <span className={`text-sm font-black mt-0.5 ${isAwaySelected ? 'text-white' : mode === 'demo' ? 'text-accent-demo' : 'text-accent-real'}`}>
                             {odds.awayOdds}
                           </span>
                         </button>
@@ -550,7 +572,7 @@ export default function Home() {
                       <div className="flex justify-between items-end pl-2 mt-4 pt-3 border-t border-border/50">
                         <div>
                           <span className="text-[10px] text-muted-foreground block">Prediction Amount</span>
-                          <span className="text-sm font-bold text-white">{bet.amount} pts</span>
+                          <span className="text-sm font-bold text-foreground">{bet.amount} pts</span>
                         </div>
                         
                         <div className="text-right">
@@ -627,13 +649,13 @@ export default function Home() {
                         <div className="w-6 h-6 rounded-full bg-slate-900 border border-border flex items-center justify-center text-xs">
                           {item.username.slice(0, 2).toUpperCase()}
                         </div>
-                        <span className={`text-xs font-bold truncate ${isCurrentUser ? 'text-accent-demo' : 'text-white'}`}>
+                        <span className={`text-xs font-bold truncate ${isCurrentUser ? 'text-accent-demo' : 'text-foreground'}`}>
                           {item.username}
                         </span>
                       </div>
 
                       {/* Balance */}
-                      <span className={`col-span-4 text-right text-xs font-black ${isCurrentUser ? 'text-accent-demo' : 'text-slate-200'}`}>
+                      <span className={`col-span-4 text-right text-xs font-black ${isCurrentUser ? 'text-accent-demo' : 'text-foreground'}`}>
                         {item.virtual_balance.toFixed(2)} pts
                       </span>
                     </div>
@@ -653,13 +675,13 @@ export default function Home() {
             <div className="flex justify-between items-start mb-4">
               <div>
                 <h3 className="font-extrabold text-sm text-muted-foreground uppercase tracking-wider">Your Prediction</h3>
-                <p className="text-xs text-white font-bold mt-1">
+                <p className="text-xs text-foreground font-bold mt-1">
                   {selectedPrediction === 'home' ? `Win ${selectedMatch.homeTeam}` : selectedPrediction === 'away' ? `Win ${selectedMatch.awayTeam}` : 'Draw'} @ {selectedOdds}
                 </p>
               </div>
               <button 
                 onClick={() => { setSelectedMatch(null); setSelectedPrediction(null); }}
-                className="text-xs bg-slate-900 border border-border px-3 py-1 rounded-full text-muted-foreground hover:text-white"
+                className="text-xs bg-slate-900 border border-border px-3 py-1 rounded-full text-muted-foreground hover:text-foreground"
               >
                 Cancel
               </button>
@@ -681,7 +703,7 @@ export default function Home() {
                       value={betAmount}
                       onChange={(e) => setBetAmount(e.target.value)}
                       placeholder="0.00"
-                      className="w-full bg-slate-950 border border-border rounded-xl p-3 text-sm font-black focus:outline-none focus:border-slate-700 text-white"
+                      className="w-full bg-slate-950 border border-border rounded-xl p-3 text-sm font-black focus:outline-none focus:border-slate-700 text-foreground"
                     />
                     <span className="absolute right-3 top-3.5 text-xs text-muted-foreground font-bold uppercase">
                       {mode === 'demo' ? 'pts' : 'usdc'}
@@ -702,7 +724,7 @@ export default function Home() {
                         setBetAmount(amt);
                       }
                     }}
-                    className="p-2 bg-slate-950 hover:bg-slate-900 border border-border rounded-xl text-xs font-bold transition-all text-muted-foreground hover:text-white"
+                    className="p-2 bg-slate-950 hover:bg-slate-900 border border-border rounded-xl text-xs font-bold transition-all text-muted-foreground hover:text-foreground"
                   >
                     {amt === 'Max' ? 'MAX' : `+${amt}`}
                   </button>
@@ -763,7 +785,7 @@ export default function Home() {
                 ? mode === 'demo'
                   ? 'text-accent-demo scale-105'
                   : 'text-accent-real scale-105'
-                : 'text-muted-foreground hover:text-white'
+                : 'text-muted-foreground hover:text-foreground'
             }`}
           >
             <Trophy className="w-5 h-5" />
@@ -777,7 +799,7 @@ export default function Home() {
                 ? mode === 'demo'
                   ? 'text-accent-demo scale-105'
                   : 'text-accent-real scale-105'
-                : 'text-muted-foreground hover:text-white'
+                : 'text-muted-foreground hover:text-foreground'
             }`}
           >
             <Briefcase className="w-5 h-5" />
@@ -791,7 +813,7 @@ export default function Home() {
                 ? mode === 'demo'
                   ? 'text-accent-demo scale-105'
                   : 'text-accent-real scale-105'
-                : 'text-muted-foreground hover:text-white'
+                : 'text-muted-foreground hover:text-foreground'
             }`}
           >
             <Award className="w-5 h-5" />

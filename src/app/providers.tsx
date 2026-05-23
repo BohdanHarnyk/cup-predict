@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { PrivyProvider, usePrivy } from '@privy-io/react-auth';
-import { dbService, Profile, VirtualBet } from '@/lib/supabase';
+import { dbService, UserProfile, VirtualBet } from '@/lib/supabase';
 
 // App State Context interface
 interface AppContextType {
@@ -10,7 +10,7 @@ interface AppContextType {
   setMode: (mode: 'demo' | 'real') => void;
   virtualBalance: number;
   bets: VirtualBet[];
-  profile: Profile | null;
+  profile: UserProfile | null;
   isLoading: boolean;
   login: () => void;
   logout: () => void;
@@ -26,7 +26,7 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 function AppStateProvider({ children }: { children: React.ReactNode }) {
   const { user, authenticated, login, logout, ready } = usePrivy();
   const [mode, setMode] = useState<'demo' | 'real'>('demo');
-  const [profile, setProfile] = useState<Profile | null>(null);
+  const [profile, setProfile] = useState<UserProfile | null>(null);
   const [bets, setBets] = useState<VirtualBet[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -125,7 +125,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       config={{
         appearance: {
           theme: 'dark',
-          accentColor: '#00e676',
+          accentColor: '#0066FF',
           logo: '⚽',
         },
         embeddedWallets: {
