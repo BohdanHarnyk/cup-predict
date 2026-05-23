@@ -24,13 +24,62 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 
 // App Context Provider Component
 function AppStateProvider({ children }: { children: React.ReactNode }) {
-  const { user, authenticated, login, logout, ready } = usePrivy();
+  const privy = usePrivy();
+  
+  // Custom mock state when offline / mock mode is enabled
+  const isMockAuth = process.env.NEXT_PUBLIC_USE_MOCK_DATA === 'true';
+  const [mockAuthenticated, setMockAuthenticated] = useState(false);
+  const [mockWalletAddress, setMockWalletAddress] = useState<string | null>(null);
+  const [mockReady, setMockReady] = useState(false);
+
   const [mode, setMode] = useState<'demo' | 'real'>('demo');
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [bets, setBets] = useState<VirtualBet[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const walletAddress = user?.wallet?.address;
+  // Map state to Privy or Mock auth
+  const authenticated = isMockAuth ? mockAuthenticated : privy.authenticated;
+  const walletAddress = isMockAuth ? mockWalletAddress : privy.user?.wallet?.address;
+  const ready = isMockAuth ? mockReady : privy.ready;
+
+  // Mock login and logout actions
+  const login = useCallback(() => {
+    if (isMockAuth) {
+      setMockAuthenticated(true);
+      setMockWalletAddress('0xabc1234567890123456789012345678901234567');
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('cuppredict_mock_auth', 'true');
+      }
+    } else {
+      privy.login();
+    }
+  }, [isMockAuth, privy]);
+
+  const logout = useCallback(() => {
+    if (isMockAuth) {
+      setMockAuthenticated(false);
+      setMockWalletAddress(null);
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('cuppredict_mock_auth');
+      }
+    } else {
+      privy.logout();
+    }
+  }, [isMockAuth, privy]);
+
+  // Initial load for mock credentials
+  useEffect(() => {
+    if (isMockAuth) {
+      if (typeof window !== 'undefined') {
+        const stored = localStorage.getItem('cuppredict_mock_auth') === 'true';
+        setMockAuthenticated(stored);
+        if (stored) {
+          setMockWalletAddress('0xabc1234567890123456789012345678901234567');
+        }
+      }
+      setMockReady(true);
+    }
+  }, [isMockAuth]);
 
   // Refresh user data (profile & bets) from Database
   const refreshData = useCallback(async () => {

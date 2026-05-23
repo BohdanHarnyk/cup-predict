@@ -15,12 +15,12 @@ const builderCode = process.env.NEXT_PUBLIC_BUILDER_CODE || '0x-cup-predict-buil
 
 // Static base odds for WC 2026 matches to provide consistency in mock mode
 const mockBasePrices: Record<string, { home: number; away: number; draw: number }> = {
-  'wc2026-match-01': { home: 0.45, away: 0.35, draw: 0.20 }, // Mexico vs USA
-  'wc2026-match-02': { home: 0.55, away: 0.25, draw: 0.20 }, // Canada vs Morocco
-  'wc2026-match-03': { home: 0.48, away: 0.38, draw: 0.14 }, // Argentina vs France (High stakes!)
-  'wc2026-match-04': { home: 0.65, away: 0.18, draw: 0.17 }, // Brazil vs Croatia
-  'wc2026-match-05': { home: 0.60, away: 0.22, draw: 0.18 }, // England vs Ukraine
-  'wc2026-match-06': { home: 0.42, away: 0.38, draw: 0.20 }, // Spain vs Germany
+  'wc2026-match-01': { home: 0.58, away: 0.20, draw: 0.22 }, // Mexico vs South Africa
+  'wc2026-match-02': { home: 0.38, away: 0.35, draw: 0.27 }, // Korea Republic vs Czechia
+  'wc2026-match-03': { home: 0.45, away: 0.28, draw: 0.27 }, // Canada vs Bosnia and Herzegovina
+  'wc2026-match-04': { home: 0.52, away: 0.22, draw: 0.26 }, // USA vs Paraguay
+  'wc2026-match-05': { home: 0.25, away: 0.50, draw: 0.25 }, // Qatar vs Switzerland
+  'wc2026-match-06': { home: 0.60, away: 0.18, draw: 0.22 }, // Brazil vs Morocco
 };
 
 // Helper: Convert raw price ($0.01 - $0.99) to sports decimal odds (e.g. 1.85)
